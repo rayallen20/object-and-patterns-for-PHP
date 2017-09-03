@@ -1,0 +1,5 @@
+PHP允许使用字符串来动态引用类 见代码TaskRunner.php
+
+class_exists('string'):接收表示类的字符串，检查并返回bool。类存在返回true,不存在返回false。见代码5.2.1
+get_declared_classes():获得脚本进程中定义的所有类的数组。这个函数会列出用户定义的类和PHP内置的类。
+它只返回在调用这个函数时已经声明的类。 见代码5.2.1

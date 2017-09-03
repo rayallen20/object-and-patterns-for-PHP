@@ -1,0 +1,14 @@
+get_class_methods('className'):返回包含类中所有声明为public的方法名的索引数组
+注:该方法可以接收对象或类名
+
+is_callable('funcName'):检测方法是否被调用
+is_callable([$obj|'className','funcName'],true(可选,默认为false)):检测类中的方法是否可被调用
+如果第二个参数写了true,则该函数仅检测给定方法或函数名称的语法是否正确，而不检测其是否存在。(这句话不懂)
+见代码5.2.3-2
+
+method_exists($obj|'className','funcName'):如果funcName在$obj或'className'中存在，则返回true。
+见代码5.2.3-3
+
+is_callable()和method_exists()的区别:is_callable()检测的是方法是否可以被调用，
+method_exists()检测的是方法是否存在。也就是说，对于一个protected或private的方法，is_callable()会返回false，
+而method_exists()会返回true。

@@ -1,0 +1,4 @@
+ReflectionParameters类:用于检查类方法的参数。
+获得ReflectionParameters类的方法:ReflectionMethod->getParameters();
+该方法返回一个由ReflectionParameter对象组成的索引数组。
+见代码5.3.5

@@ -1,0 +1,12 @@
+__autoload()和spl_autoload_register()
+当PHP遇到视图实例化未知类的操作时，会自动调用__autoload()方法，
+并将类名当做字符串参数传递给它。见代码5.1.2
+
+
+spl_autoload_register()
+概念:注册给定的函数作为__autoload()的实现
+实际上创建了__autoload()函数的队列，按定义时的顺序逐个执行。相比于__autoload()方法更加灵活。
+因为__autoload()方法只能定义一次。
+在spl_autoload_register()调用多个函数时，它的规则如下:
+如果第一个spl_autoload_register()调用的函数没有成功加载到类文件，则执行下一个。
+直到成功加载到类文件时，后边的spl_autoload_register()方法不再执行。代码见5.1.2-2

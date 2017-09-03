@@ -1,0 +1,14 @@
+使用ReflectionClass检查类时，用到的一些方法:
+getName():返回要检查的类名
+isUserDefined():是否为用户定义的类 是则返回true
+isInternal():是否是内置的类 是则返回true
+isAbstract():是否为抽象类 是则返回true
+isInterface():是否为interface 是则返回true
+isInstantiable():类是否可以被实例化 是则返回true
+见代码5.3.3
+
+getFileName():到这个类文件的绝对路径
+file($path):返回由文件中所有行组成的数组
+getStartLine():提供类的起始行
+getEndLine():提供类的终止行
+见代码5.3.3-2

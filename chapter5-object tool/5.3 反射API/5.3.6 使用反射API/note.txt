@@ -1,0 +1,3 @@
+ReflectionMethod::invoke($obj,$parameter)
+如果ReflectionMethod所包括的方法隶属于$obj对象的类，则
+ReflectionMethod::invoke($obj,$parameter)等效于 $obj->func($parameter)

@@ -1,0 +1,32 @@
+3.3 使用方法
+属性可以让对象存储数据，类方法则可以让对象执行任务。
+在代码3.3中，我们使用了一个新的概念:$this。
+简单理解，$this就是"当前实例"。
+
+PART1 使用构造方法
+我们希望，每次创建对象时，对象都能自动且必须接收title、producerMainName、producerFirstName、price这4个变量。
+因为这些是每个商品必须有的属性。但是如3.3中的代码，这些属性可以被设置为默认值，我们同样不希望在创建一个商品时
+这个商品的属性是类中定义的无效的默认值数据。
+
+class ShopProduct
+{
+    public $title;
+    public $producerMainName;
+    public $producerFirstName;
+    public $price = 0;
+
+    public function __construct($title, $producerMainName, $producerFirstName, $price)
+    {
+        $this->title = $title;
+        $this->producerMainName = $producerMainName;
+        $this->producerFirstName = $producerFirstName;
+        $this->price = $price;
+    }
+
+    public function getProducer()
+    {
+        return $this->producerMainName.$this->producerFirstName;
+    }
+}
+
+3.3-1中的代码，比3.3的更具有可预测性。因为所有使用这个类的人，都确信属性都已经被设置了。

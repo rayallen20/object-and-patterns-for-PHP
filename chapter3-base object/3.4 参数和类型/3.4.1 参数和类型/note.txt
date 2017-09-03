@@ -1,0 +1,33 @@
+首先，来看一段代码
+class addressManager
+{
+    private $addresses = ['192.168.1.1', '127.0.0.1'];
+
+    public function outputAddresses($resolve)
+    {
+        foreach ($this->addresses as $address)
+        {
+            if($resolve)
+            {
+                print "(" . gethostbyaddr($address) . ")";
+            }
+            print "\n";
+        }
+    }
+}
+
+$settings = simplexml_load_file("settings.xml");
+$manager = new addressManager();
+$manager->outputAddresses((string)$settings->resolve);
+
+其对应的xml文件代码:
+<settings>
+    <resolvedomains>false</resolvedomains>
+</settings>
+
+在PHP7下，会将字符串"false"解析为布尔值false，但是如果是PHP5
+字符串"false"则会在if条件判断中被解析为true，导致本来不该被查找域名的IP，
+会用来查找对应域名。
+那么，该如何改进呢？ 见代码3.4.1-2
+
+PHP作为一门弱类型语言，根据潜在BUG的严重级别不同，有时需要规定参数的数据类型

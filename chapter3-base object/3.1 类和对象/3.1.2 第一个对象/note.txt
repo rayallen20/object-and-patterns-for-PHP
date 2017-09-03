@@ -1,0 +1,11 @@
+3.1.2 第一个对象
+对象是一种由类定义的数据类型。
+在代码3.1.2中，$product1和$product2是不同的，虽然它们都是一个类所产生的对象。但是它们是同一类型的不同实例。
+在PHP脚本中创建的每个对象有唯一的身份标识。PHP会在一个进程内重复使用这些标识符来访问这些对象。
+运行3.1.2的结果
+E:\xampp-php7\htdocs\obj\chapter3-base object\3.1 类和对象\3.1.2 第一个对象\3.1.2 fisrtObject.php:9:
+object(ShopProduct)[1]
+E:\xampp-php7\htdocs\obj\chapter3-base object\3.1 类和对象\3.1.2 第一个对象\3.1.2 fisrtObject.php:10:
+object(ShopProduct)[2]
+
+[1]和[2]就是它们的标识符。

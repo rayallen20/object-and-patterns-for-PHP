@@ -1,0 +1,5 @@
+get_parent_class('className'):检测给定的类名是否存在父类，存在则返回父类的类名，不存在则返回false。
+见代码5.2.5
+
+is_subclass_of($obj,'className'):其中$obj为子类对象，className为父类类名。如果className是$obj类的父类则返回true，否则返回false。
+见代码5.2.5-2

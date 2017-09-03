@@ -1,0 +1,18 @@
+public:在任何地方都可以访问的属性和方法
+protected:在当前类和子类中可以访问的属性和方法
+private:只有在当前类中可以访问的属性和方法
+
+注意:方法的继承只能越来越宽松，不能越来越严格。
+即:父类中的protected的方法，到了子类中只能是public或protected，不能是private
+
+问题1:现在有了一个新的需求，打折。使所有商品支持打折功能，该怎么做? 见代码3.5.3
+但是，代码3.5.3中有一个问题，用户还是可以直接访问$product->price,从而看到商品的原价格。该怎么解决？
+ -- 将$price设置为protected，使用户无法从外部访问
+
+1. 访问方法
+当有程序员需要使用类中保存的值时，不要允许直接访问属性，而是提供方法来取得需要的值。这种方法被称为访问方法。
+又称getter或setter。
+这样做的好处在于:可以使用访问方法根据环境过滤属性。即控制某些属性不能从外部访问到。也可以使用访问方法来强制属性类型。
+例:修改ShopProductWriter类 见代码3.5.3-2的ShopProductWriter类
+
+最终版本的ShopProduct CDProduct BookProduct ShopProductWriter类 代码 3.5.3-3

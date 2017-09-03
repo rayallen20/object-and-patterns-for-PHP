@@ -1,0 +1,4 @@
+ReflectionMethod对象用于检查类中的方法。
+获得ReflectionMethod对象的方法:
+1.ReflectionClass::getMethods()获得一个ReflectionMethod对象的数组
+2.ReflectionClass::getMethod('funcName')返回一个对应的ReflectionMethod对象

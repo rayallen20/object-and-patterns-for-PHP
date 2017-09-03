@@ -1,0 +1,2 @@
+get_class_vars('className'):以关联数组的形式列出类中所有public的属性。其中，key为属性名，value为属性值。
+见代码:5.2.4
