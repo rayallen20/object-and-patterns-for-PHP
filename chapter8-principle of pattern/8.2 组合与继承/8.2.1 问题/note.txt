@@ -1,0 +1,17 @@
+问题:
+在大学中有不同的课程，现在我们要满足如下需求:
+给课程设置不同的收费机制，有的课程是固定收费的，有的课程是按次数收费的。
+该如何做？
+抽象类:Lesson
+子类:FixedPriceLesson和TimedPriceLesson
+
+这时又有了新的需求，要求对演讲和研讨会等教学活动按同样的收费机制实现，该怎么做？
+
+不好的做法:
+抽象类:Lesson
+Lesson的子类:Lecture(演讲)和Seminar(研讨会)
+Lecture和Seminar的子类:FixedPriceLesson和TimedPriceLesson
+不好在哪？
+定价的策略会在Lecture和Seminar的子类中，重复实现。如果要是把这部分实现
+挪到父类(Lesson)中，则违反了多态替换条件的重构思想。
+代码8.2.1 就是按照上述说法，将定价策略写在了父类中。
