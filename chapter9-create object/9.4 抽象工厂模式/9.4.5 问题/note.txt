@@ -1,0 +1,12 @@
+现在有一款"文明"风格的网游。可以再区块组成的各自中操作战斗单元。
+每个区块分别代表海洋、平原和森林。地形的种类限制了区块内的单元的移动和格斗能力。
+我们可以有一个TerrainFactory对象来提供Sea、Forest和Plains对象。
+且允许用户在不同的环境中选择。即地形有可能出现在地球(Earth)或者火星(Mars)。
+因此，Sea就有可能是MarsSea和EarthSea的抽象父类。这种分支就构成了抽象工厂模式。
+不同的产品体系(Sea Plains Forest)，而产品家族之间有超越继承的紧密联系。(比如Earth和Mars都存在Sea Forest Plains)
+类图见9-10。
+
+从图中可以看到，我们是依赖于继承来组合工厂生成的terrain(地形)产品。
+(此处的继承指的是EarthTerrainFactory和MarsTerrainFactory都继承自TerrainFactory，不是指EarthSea和MarsSea继承自Sea)
+但是随着地形种类和星球种类的大量增加，这种继承体系就不那么灵活了。
+当我们不想要平行的继承体系而需要最大化运行时的灵活性，抽象工厂模式的强大变形--原型模式就出现了。
