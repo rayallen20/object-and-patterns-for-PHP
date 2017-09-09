@@ -1,0 +1,8 @@
+我们再来看个人事务管理的示例。
+通过加入更多的编码格式，我们可以使继承结构横向增长。但是如何才能给不同类型的CommsManager的子类
+加入编码器使它们纵向增长呢？
+
+问题:目前又加入了待办事项(Ttd)和联系人(Contact)的功能，依旧是需要不同的编码格式来做数据交换，该怎么解决？
+首先，从图9-6中我们可以看到产品家族。其次，我们知道，getHeaderText()和getFooterText()方法，
+只是和数据格式相关，和数据格式中的内容无关。所以我们应该给抽象类CommsManager中，加入getTtdEncoder()和
+getContactEncoder()两个抽象方法，使得抽象类能够创建TtdEncoder类和ContactEncoder的对象。见图9-7
