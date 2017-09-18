@@ -1,0 +1,47 @@
+装饰模式使用组合和委托而不是只使用继承来解决功能变化的问题。
+Decorator类会持有另外一个类的实例。Decorator对象会实现和被调用对象的方法相对应的类方法。
+(这两句话的具体解释见代码10.3.2)
+在这个问题中，我们可以在运行时创建一系列的Decorator对象。
+重写游戏来演示这个模式。见代码10.3.2
+
+个人对这段代码的分析
+1.装饰模式 谁是被装饰者 谁是装饰者？
+在这两句话中
+    $tile = new DiamondDecorator(new Plains());
+    echo $tile->getWealthFactor();
+Plains类是被装饰者 DiamondDecorator类是装饰者
+转换场景
+在这两句话中
+    $tile = new PollutedDecorator(new DiamondDecorator(new Plains()));
+    echo $tile->getWealthFactor();
+装饰了Plains类的DiamondDecorator类是被装饰者    PollutedDecorator类是装饰者
+这也就同时解答了10.3.1中提出的问题:如果有一个既被污染又有钻石的区域，该如何处理
+
+2.这种模式的好处在哪？
+保持核心功能不变的同时，可以灵活的扩展功能。而且可以由客户端来自行决定如何扩展功能。
+在扩展功能的同时，还可以保证提供相同的接口供客户端调用。
+例如:这种模式下我们可以很轻松的定义一个被污染、有钻石且有黄金的区域的财富指数。
+
+个人理解结束 书中内容继续
+
+DiamondDecorator和PollutedDecorator两个类都扩展自TileDecorator类，也就是说它们都有
+对Tile对象的引用。
+运行过程:当DiamondDecorator和PollutedDecorator的getWealthFactor()方法被调用时，它们都要先调用
+自己所引用的那个Tile对象的getWealthFactor()方法，然后做自己的操作。
+
+我没看到的点:
+1.通过这样的组合[组合在TileDecorator类的构造方法的形参中有所体现]和委托
+[委托在DiamondDecorator和PollutedDecorator的getWealthFactor方法中的 先调用$this->tile->getWealthFactor()这一步有所体现]
+，可以再运行时轻松地合并对象[如new PollutedDecorator(new DiamondDecorator(new Plains())) 将3个对象合并为了1个]。
+因为模式中所有对象都扩展自Tile，所以客户端代码并不需要知道内部是如何合并的。
+
+2.这样的代码组织模型有着很好的扩展性。这样的结构使得我们可以轻松地添加新的装饰器(本例中就是新的地形条件 如被污染 有钻石 有黄金等)
+和新的组件(本例中就是新的地形 如平原 森林)。通过使用装饰器，我们可以在运行时创建很灵活的结构。
+
+装饰模式所建立的管道[这个管道指的是多个装饰器串联起来，像一条管道一样]对于创建过滤器非常有用。
+例2:使用装饰模式简单实现将Web请求做成一个具有可配置管道的模型。
+见代码10.3.2-2
+
+在这段代码中，装饰类的每个process()方法在调用引用的ProcessRequest对象的process()方法之前
+输出了一句话，代表着做了某些操作。可以看到在客户端代码中，将4个对象合并为了1个对象，并且创建了
+过滤器管道按创建对象的顺序执行了不同的操作。
