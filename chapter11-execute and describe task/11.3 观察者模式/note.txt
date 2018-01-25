@@ -56,3 +56,10 @@ PART2 实现
 那么再git checkout一下，如何解决上面所说的"如何得知你的服务端代码中包含一个叫做getStatus()的方法"这一问题的呢？
 见代码11-3-5.php
 
+思路:
+从观察者类的接口下手，对每个观察者的实现类，写一个抽象类。
+该抽象类的功能:
+1.通过__construct(Login $login) 将观察者类的实现类，绑定到主体类上
+2.因为1个主体会对应多个观察者，所以需要让多个观察者，同时监听主体类是否发生了"事件"。通过update(Observable $observable)方法，实现了当主体为Login类时，
+执行所有监听了Login类的观察者的doUpdate(Login $login)方法
+

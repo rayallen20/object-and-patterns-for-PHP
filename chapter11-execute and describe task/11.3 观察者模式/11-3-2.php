@@ -29,7 +29,7 @@ class Login
             default:
                 $ret = false;
         }
-        // 添加记录用户登录时的IP和状态功能
+        // 新需求1:添加功能:记录用户登录时的IP和状态
         Log::logIp($user, $ip, $this->status);
         return $ret;
     }

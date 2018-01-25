@@ -120,14 +120,14 @@ abstract class LoginObserver implements Observer
     public function __construct(Login $login)
     {
         $this->login = $login;
-        $login->attach($this);
+        $login->attach($this);                  // 把自己绑定到主体上
     }
 
     public function update(Observable $observable)
     {
         if($observable === $this->login)
         {
-            self::doUpdate($observable);
+            self::doUpdate($observable);        // 执行自己的update()
         }
     }
 
@@ -139,15 +139,49 @@ abstract class LoginObserver implements Observer
  * n. 监视器；监听器；监控器；显示屏；班长
  * vt. 监控
 */
-class SecurityMonitor implements Observer
+class SecurityMonitor extends LoginObserver
 {
-    public function update(Observable $observable)
+    public function doUpdate(Login $login)
     {
-        // 这里 就有一个问题:你作为一个观察者类，你怎么知道主体类接口的实现一定存在getStatus()方法？
-        $status = $observable->getStatus();
+        $status = $login->getStatus();
         if($status[0] == Login::LOGIN_WRONG_PASS || $status[0] == Login::LOGIN_USER_UNKNOWN)
         {
             print __CLASS__ . "\tsending mail to sysadmin\n";
         }
     }
 }
+
+/**
+ * 观察者类-记录IP
+*/
+class GeneralLogger extends LoginObserver
+{
+    public function doUpdate(Login $login)
+    {
+        $status = $login->getStatus();
+        // 记录登录IP
+        print __CLASS__ . ":\tadd login data to log\n";
+    }
+}
+
+/**
+ * 设置cookie
+ * partnership
+ * n. 合伙；[经管] 合伙企业；合作关系；合伙契约
+*/
+class PartnershipTool extends LoginObserver
+{
+    public function doUpdate(Login $login)
+    {
+        $status = $login->getStatus();
+        // 设置cookie
+        print __CLASS__ . "\tset cookie if IP matches a list\n";
+    }
+}
+
+$login = new Login();
+$login->handleLogin('allenRay', '127.0.0.1');
+$securityMonitor = new SecurityMonitor($login);
+$generalLogger = new GeneralLogger($login);
+$partnershipTool = new PartnershipTool($login);
+

@@ -18,9 +18,9 @@
 */
 interface Observable
 {
-    public function attach(Observer $observer);
-    public function detach(Observer $observer);
-    function notify();
+    public function attach(Observer $observer);     // 绑定观察者到主体
+    public function detach(Observer $observer);     // 解绑观察者和主体
+    function notify();                               // 通知观察者事件发生
 }
 
 /**
@@ -85,6 +85,15 @@ class Login implements Observable
         foreach ($this->observers as $obs)
         {
             // 此处 判断的是$obs和$observer中承载的是不是同1个类的同1个实例
+            /*
+             * 如果$a 和 $b 是同一个类的2个不同实例,那么使用$a == $b来判断
+             * $a 和 $b是否相等的条件为:
+             * 1. $a 和 $b是否是同一个类的实例
+             * 2. 他们的属性和值是否都相等
+             * 如果满足这2个条件 则判定 $a == $b 为 true
+             * 如果使用 $a === $b 则必须满足:
+             * 1.当且仅当 $a 和 $b 引用的是同一个类的同一个实例时 $a === $b 为 true
+             * */
             if($obs !== $observer)
             {
                 $newObservers[] = $observer;
@@ -126,5 +135,23 @@ class SecurityMonitor implements Observer
         {
             print __CLASS__ . "\tsending mail to sysadmin\n";
         }
+        else
+        {
+            print __CLASS__ . "\tdon't need send mail\n";
+        }
     }
 }
+
+/*
+$manjor = new Login();
+
+// 绑定"发送邮件"观察者到主体
+$securityMonitor = new SecurityMonitor();
+$manjor->attach($securityMonitor);
+
+// 调用实现功能方法
+$manjor->handleLogin('allenRay', '127.0.0.1');
+*/
+$login = new Login();
+$login->attach(new SecurityMonitor());
+$login->handleLogin('allenRay', '127.0.0.1');

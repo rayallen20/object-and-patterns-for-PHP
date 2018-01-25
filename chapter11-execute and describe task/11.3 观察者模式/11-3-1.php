@@ -4,9 +4,9 @@
  * */
 class Login
 {
-    const LOGIN_USER_UNKNOWN = 1;
-    const LOGIN_WRONG_PASS = 2;
-    const LOGIN_ACCESS = 3;
+    const LOGIN_USER_UNKNOWN = 1;   // 无此用户
+    const LOGIN_WRONG_PASS = 2;     // 密码错误
+    const LOGIN_ACCESS = 3;         // 登录成功
 
     private $status = array();
 

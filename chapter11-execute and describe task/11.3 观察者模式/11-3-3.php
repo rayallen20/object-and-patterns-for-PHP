@@ -29,13 +29,13 @@ class Login
             default:
                 $ret = false;
         }
-        // 添加记录用户登录时的IP和状态功能
+        // 新需求1:添加功能:记录用户登录时的IP和状态
         Log::logIp($user, $ip, $this->status);
 
-        // 添加登录失败时发送邮件功能
+        // 新需求2:添加功能:登录失败时发送邮件
         if(!$ret)
         {
-            Notifier::mailWarning($user, $ip, $this->status);
+            Notifier::mailWarning($user, $ip, $this->getStatus());
         }
         return $ret;
     }
