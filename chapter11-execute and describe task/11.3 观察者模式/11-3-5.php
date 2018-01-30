@@ -184,4 +184,3 @@ $login->handleLogin('allenRay', '127.0.0.1');
 $securityMonitor = new SecurityMonitor($login);
 $generalLogger = new GeneralLogger($login);
 $partnershipTool = new PartnershipTool($login);
-
