@@ -49,7 +49,10 @@ class Army extends Unit
 //异常类 供抛出异常用
 class UnitException extends Exception
 {
-
+    public function __construct(string $message = "", int $code = 0, Throwable $previous = null)
+    {
+        parent::__construct($message, $code, $previous);
+    }
 }
 // 叶子类Archer
 class Archer extends Unit
